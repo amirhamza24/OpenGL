@@ -99,41 +99,47 @@ void myDisplay(){
   glLoadIdentity();
   glTranslated(0,0,-20);
   //glRotated(-45,1,1,0);
-  glRotated(r,1,0,1);
+  glRotated(r,1,0,0);
 
 
+    //front
     glPushMatrix();
-        glTranslated(0,2,-2);
+        glTranslated(0,1.7,-2);
         glScaled(1,1,0.1);
         cube(1,0,0);
     glPopMatrix();
 
+    //seat
     glPushMatrix();
         glTranslated(0,-1,1);
         glScaled(1,0.1,1);
         cube(1,1,0);
     glPopMatrix();
 
+    //top-right
     glPushMatrix();
-        glTranslated(2.8,-3.8,3);
+        glTranslated(2.7,-3.8,3.7);
         glScaled(0.1,1,0.1);
         cube(1,1,1);
     glPopMatrix();
 
+    //top-left
     glPushMatrix();
-        glTranslated(-2.8,-3.8,3);
+        glTranslated(-2.7,-3.8,3.7);
         glScaled(0.1,1,0.1);
         cube(1,1,1);
     glPopMatrix();
 
+    //bottom-left
     glPushMatrix();
-        glTranslated(-2.8,-3.8,-3);
+        glTranslated(-2.7,-3.8,-2);
         glScaled(0.1,1,0.1);
         cube(1,1,1);
     glPopMatrix();
 
+    //bottom-right
     glPushMatrix();
-        glTranslated(+2.8,-3.8,-3);
+        glTranslated(2.7,-3.8,-2);
         glScaled(0.1,1,0.1);
         cube(1,1,1);
     glPopMatrix();
@@ -157,7 +163,7 @@ void keyMove(unsigned char key, int x, int y)
         glutIdleFunc(rotates);
         break;
 
-    case 'b':
+    case 's':
         glutIdleFunc(NULL);
         break;
     }
