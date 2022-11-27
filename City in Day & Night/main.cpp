@@ -52,15 +52,16 @@ void Line2(int x,int y, int x1, int y1)
     glPopMatrix();
 }
 
-void box()
+void Zebra(int x)
 {
     glPushMatrix();
-    glColor3ub(255, 255, 255);
+    glTranslated(x,-140,0);
+    glColor3ub(252, 252, 250);
     glBegin(GL_POLYGON);
-    glVertex2d(216,190);
-    glVertex2d(216,190);
-    glVertex2d(231,175);
-    glVertex2d(231,175);
+    glVertex2d(10,30);
+    glVertex2d(13,30);
+    glVertex2d(-10,-30);
+    glVertex2d(-13,-30);
     glEnd();
     glPopMatrix();
 }
@@ -68,6 +69,8 @@ void box()
 void myDisplay()
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    ///UPPER PORTION
+
     ///BackGround
     glPushMatrix();
     glBegin(GL_POLYGON);
@@ -80,7 +83,7 @@ void myDisplay()
     glPopMatrix();
     glPushMatrix();
     glBegin(GL_POLYGON);
-    glColor3ub(77, 172, 252);
+    glColor3ub(164, 230, 255);
     glVertex2d(-300,50);
     glVertex2d(300,50);
     glVertex2d(300,300);
@@ -88,7 +91,62 @@ void myDisplay()
     glEnd();
 
     glPopMatrix();
-
+    ///Background Building
+    glPushMatrix();
+    glBegin(GL_POLYGON);
+    glColor3ub(171, 190, 232);
+    glVertex2d(-40,180);
+    glVertex2d(0,180);
+    glVertex2d(0,50);
+    glVertex2d(-40,50);
+    glEnd();
+    glPopMatrix();
+    glPushMatrix();
+    glBegin(GL_POLYGON);
+    glColor3ub(171, 190, 232);
+    glVertex2d(0,160);
+    glVertex2d(20,160);
+    glVertex2d(20,50);
+    glVertex2d(0,50);
+    glEnd();
+    glPopMatrix();
+    glPushMatrix();
+    glBegin(GL_POLYGON);
+    glColor3ub(171, 190, 232);
+    glVertex2d(20,230);
+    glVertex2d(60,230);
+    glVertex2d(60,50);
+    glVertex2d(20,50);
+    glEnd();
+    glPopMatrix();
+    ///Back Back
+    glPushMatrix();
+    glBegin(GL_POLYGON);
+    glColor3ub(140, 164, 210);
+    glVertex2d(-40,100);
+    glVertex2d(0,100);
+    glVertex2d(0,50);
+    glVertex2d(-40,50);
+    glEnd();
+    glPopMatrix();
+    glPushMatrix();
+    glBegin(GL_POLYGON);
+    glColor3ub(140, 164, 210);
+    glVertex2d(0,80);
+    glVertex2d(20,80);
+    glVertex2d(20,50);
+    glVertex2d(0,50);
+    glEnd();
+    glPopMatrix();
+    glPushMatrix();
+    glBegin(GL_POLYGON);
+    glColor3ub(140, 164, 210);
+    glVertex2d(20,150);
+    glVertex2d(60,150);
+    glVertex2d(60,50);
+    glVertex2d(20,50);
+    glEnd();
+    glPopMatrix();
     ///Left Building
     glPushMatrix();
     glColor3ub(172, 139, 156);
@@ -183,7 +241,7 @@ void myDisplay()
 
     /// Right Side big
 
-     glPushMatrix();
+    glPushMatrix();
     glColor3ub(108, 131, 175);
     glBegin(GL_POLYGON);
     glVertex2d(60,50);
@@ -200,6 +258,22 @@ void myDisplay()
     Line(-200,0,-200,200);
     Line(-180,0,-180,200);
     Line(-100,0,-100,200);
+    ///Right Side
+    glPushMatrix();
+    glColor3ub(53, 48, 68);
+    glBegin(GL_POLYGON);
+    glVertex2d(215,50);
+    glVertex2d(215,200);
+    glVertex2d(130,185);
+    glVertex2d(130,60);
+    glEnd();
+    glPopMatrix();
+
+    Line2(-85,0,-85,0);
+    Line2(-110,4,-110,-4);
+    Line2(-140,7,-140,-9);
+    Line2(-165,10,-165,-14);
+
 
 
 
@@ -216,7 +290,7 @@ void myDisplay()
     glPopMatrix();
 
 
-     glPushMatrix();
+    glPushMatrix();
     glColor3ub(71, 51, 76);
     glBegin(GL_POLYGON);
     glVertex2d(220,200);
@@ -227,7 +301,7 @@ void myDisplay()
     glPopMatrix();
 
 
-     glPushMatrix();
+    glPushMatrix();
     glColor3ub(75, 76, 104);
     glBegin(GL_POLYGON);
     glVertex2d(240,250);
@@ -268,7 +342,7 @@ void myDisplay()
     glEnd();
 
     glPopMatrix();
-      glColor3ub(185, 150, 165);
+    glColor3ub(185, 150, 165);
     glBegin(GL_POLYGON);
     glVertex2d(270,220);
     glVertex2d(270,225);
@@ -278,7 +352,7 @@ void myDisplay()
     glPopMatrix();
 
     glPopMatrix();
-      glColor3ub(185, 150, 165);
+    glColor3ub(185, 150, 165);
     glBegin(GL_POLYGON);
     glVertex2d(240,220);
     glVertex2d(240,225);
@@ -288,7 +362,7 @@ void myDisplay()
     glPopMatrix();
 
     glPopMatrix();
-      glColor3ub(185, 150, 165);
+    glColor3ub(185, 150, 165);
     glBegin(GL_POLYGON);
     glVertex2d(240,260);
     glVertex2d(240,265);
@@ -298,7 +372,7 @@ void myDisplay()
     glPopMatrix();
 
     glPopMatrix();
-      glColor3ub(185, 150, 165);
+    glColor3ub(185, 150, 165);
     glBegin(GL_POLYGON);
     glVertex2d(260,270);
     glVertex2d(260,280);
@@ -307,7 +381,7 @@ void myDisplay()
     glEnd();
 
     glPopMatrix();
-      glColor3ub(185, 150, 165);
+    glColor3ub(185, 150, 165);
     glBegin(GL_POLYGON);
     glVertex2d(275,270);
     glVertex2d(275,275);
@@ -350,7 +424,7 @@ void myDisplay()
     glEnd();
     /// 2nd tree
 
-     glPushMatrix();
+    glPushMatrix();
     glColor3ub(122, 121, 56);
     glBegin(GL_POLYGON);
     glVertex2d(-85,80);
@@ -374,7 +448,7 @@ void myDisplay()
     glVertex2d(-85,150);
     glEnd();
 
-     glColor3ub(40, 26, 36);
+    glColor3ub(40, 26, 36);
     glBegin(GL_POLYGON);
     glVertex2d(-87.5,60);
     glVertex2d(-82.5,60);
@@ -396,7 +470,7 @@ void myDisplay()
     glEnd();
     glPopMatrix();
 
-     glPushMatrix();
+    glPushMatrix();
     glColor3ub(204, 183, 66);
     glBegin(GL_POLYGON);
     glVertex2d(-265,80);
@@ -420,52 +494,7 @@ void myDisplay()
     glPopMatrix();
 
 
-
-
-    ///traffic light
-
-    glColor3ub(237, 224, 233);
-    glBegin(GL_POLYGON);
-    glVertex2d(-200,-140);
-    glVertex2d(-180,-140);
-    glVertex2d(-180,-160);
-    glVertex2d(-200,-160);
-    glEnd();
-
-
-     glColor3ub(237, 224, 233);
-    glBegin(GL_POLYGON);
-    glVertex2d(-187,-140);
-    glVertex2d(-187,5);
-    glVertex2d(-193,5);
-    glVertex2d(-193,-140);
-    glEnd();
-
-     glColor3ub(37, 24, 38);
-    glBegin(GL_POLYGON);
-    glVertex2d(-197,0);
-    glVertex2d(-183,0);
-    glVertex2d(-183,45);
-    glVertex2d(-197,45);
-    glEnd();
-
-
-
-    ///Right Side
-    glPushMatrix();
-    glColor3ub(53, 48, 68);
-    glBegin(GL_POLYGON);
-    glVertex2d(215,50);
-    glVertex2d(215,200);
-    glVertex2d(130,185);
-    glVertex2d(130,60);
-    glEnd();
-    glPopMatrix();
-
-    Line2(-85,0,-85,0);
-    Line2(-110,4,-110,-4);
-    Line2(-140,7,-140,-9);
-    Line2(-165,10,-165,-14);
+    /// LOWER PORTION
 
 
     ///Left up
@@ -506,8 +535,8 @@ void myDisplay()
     glBegin(GL_POLYGON);
     glVertex2d(-245,-100);
     glVertex2d(-255,-107);
+    glVertex2d(-305,-198);
     glVertex2d(-300,-200);
-    glVertex2d(-300,-198);
     glEnd();
     glPopMatrix();
 
@@ -527,8 +556,8 @@ void myDisplay()
     glBegin(GL_POLYGON);
     glVertex2d(245,-100);
     glVertex2d(255,-107);
-    glVertex2d(300,-200);
-    glVertex2d(300,-198);
+    glVertex2d(230,-300);
+    glVertex2d(225,-300);
     glEnd();
     glPopMatrix();
 
@@ -536,24 +565,81 @@ void myDisplay()
     glPushMatrix();
     glColor3ub(255, 204, 204);
     glBegin(GL_POLYGON);
-    glVertex2d(-33,70);
-    glVertex2d(-31,70);
+    glVertex2d(-130,-100);
+    glVertex2d(-135,-100);
     glVertex2d(-210,-300);
-    glVertex2d(-215,-300);
+    glVertex2d(-220,-300);
     glEnd();
     glPopMatrix();
 
     ///Right Road
     glPushMatrix();
     glColor3ub(255, 204, 204);
+    glTranslated(-25,0,0);
     glBegin(GL_POLYGON);
-    glVertex2d(33,70);
-    glVertex2d(31,70);
-    glVertex2d(210,-300);
-    glVertex2d(215,-300);
+    glVertex2d(185,-100);
+    glVertex2d(190,-100);
+    glVertex2d(140,-300);
+    glVertex2d(150,-300);
+    glEnd();
+    glPopMatrix();
+    ///Divider UP
+    glPushMatrix();
+    glColor3ub(5, 4, 13);
+    glBegin(GL_POLYGON);
+    glVertex2d(-300,48);
+    glVertex2d(300,48);
+    glVertex2d(300,50);
+    glVertex2d(-300,50);
+    glEnd();
+    glPopMatrix();
+    ///Divider Down
+    glPushMatrix();
+    glColor3ub(5, 4, 13);
+    glBegin(GL_POLYGON);
+    glVertex2d(-300,-98);
+    glVertex2d(300,-98);
+    glVertex2d(300,-100);
+    glVertex2d(-300,-100);
     glEnd();
     glPopMatrix();
 
+
+    ///Zebra Crossing
+
+    Zebra(0);
+    Zebra(10);
+    for(int i=0; i<150; i+=10){
+        Zebra(i);
+        Zebra(-i);
+    }
+    ///traffic light
+    glPushMatrix();
+    glColor3ub(237, 224, 233);
+    glBegin(GL_POLYGON);
+    glVertex2d(-200,-140);
+    glVertex2d(-180,-140);
+    glVertex2d(-180,-160);
+    glVertex2d(-200,-160);
+    glEnd();
+
+
+    glColor3ub(237, 224, 233);
+    glBegin(GL_POLYGON);
+    glVertex2d(-187,-140);
+    glVertex2d(-187,5);
+    glVertex2d(-193,5);
+    glVertex2d(-193,-140);
+    glEnd();
+
+    glColor3ub(37, 24, 38);
+    glBegin(GL_POLYGON);
+    glVertex2d(-197,0);
+    glVertex2d(-183,0);
+    glVertex2d(-183,45);
+    glVertex2d(-197,45);
+    glEnd();
+    glPopMatrix();
     glFlush();
 }
 int main()
@@ -568,3 +654,4 @@ int main()
 
     return 0;
 }
+
