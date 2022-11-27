@@ -4,13 +4,160 @@
 #else
 #include <GL/glut.h>
 #endif
+#include<math.h>
 
 #include <stdlib.h>
+
+double vPos1 = 0;
+double vPos2 = 800;
+double vPos3 = -400;
+double vPos4 = 700;
+double vPos5 = -800;
+double vPos6 = -300;
+
+double vSpeed1 = 0.0;
+double vSpeed2 = 0.0;
+double vSpeed3 = 0.0;
+double vSpeed4 = 0.0;
+double vSpeed5 = 0.0;
+double vSpeed6 = 0.0;
+
 void init()
 {
     glClearColor(0,0,0,0);
     glOrtho(-300,300,-300,300,-300,300);
 }
+void circleShape(int x, int y, double h, double w){
+
+    glBegin(GL_POLYGON);
+
+    for (float i = 0; i < 10; i += 0.1){
+        glVertex2d(x + w * cos(i), y + h * sin(i));
+    }
+
+    glEnd();
+}
+
+void truck(){
+    // container
+    glColor3ub(247, 176, 35);
+    glBegin(GL_POLYGON);
+        glVertex2d(0,0);
+        glVertex2d(400,0);
+        glVertex2d(400, 150);
+        glVertex2d(0, 150);
+    glEnd();
+
+    // main body
+    glBegin(GL_POLYGON);
+        glColor3ub(180, 180, 180);
+        glVertex2d(0,-10);
+        glVertex2d(420,-10);
+        glColor3ub(160, 160, 160);
+        glVertex2d(420, -40);
+        glColor3ub(180, 180, 180);
+        glVertex2d(0, -40);
+    glEnd();
+
+    // Head
+    glColor3ub(40, 40, 200);
+    glBegin(GL_POLYGON);
+        glColor3ub(100, 100, 200);
+        glVertex2d(400,-40);
+        glVertex2d(550,-40);
+
+        glColor3ub(140, 140, 240);
+        glVertex2d(550, 40);
+
+        glColor3ub(180, 180, 255);
+        glVertex2d(470, 100);
+        glVertex2d(400, 100);
+    glEnd();
+
+    glPushMatrix();
+        glTranslated(440, 15, 1);
+        glScaled(0.4, 0.7, 1);
+        glBegin(GL_POLYGON);
+            glColor3ub(99, 99, 99);
+            glVertex2d(-70,20);
+            glColor3ub(55, 55, 55);
+            glVertex2d(200,20);
+            glColor3ub(99, 99, 99);
+            glVertex2d(100, 100);
+            glColor3ub(55, 55, 55);
+            glVertex2d(-70, 100);
+        glEnd();
+    glPopMatrix();
+
+    // tires
+    glColor3ub(85,85,85);
+    circleShape(100, -40, 50, 50);
+    circleShape(450, -40, 50, 50);
+
+
+    // wheels
+    glColor3ub(200,200,200);
+    circleShape(100, -40, 20, 20);
+    circleShape(450, -40, 20, 20);
+
+
+}
+
+void car(){
+    // Main body
+    glColor3ub(7, 126, 159);
+    glBegin(GL_POLYGON);
+        glVertex2d(-350,0);
+        glVertex2d(390,0);
+        glVertex2d(400, -110);
+        glVertex2d(-350, -110);
+    glEnd();
+
+    // upper body black
+    glColor3ub(100, 100, 130);
+    glBegin(GL_POLYGON);
+        glVertex2d(-350,0);
+        glVertex2d(250,0);
+        glVertex2d(120, 120);
+        glVertex2d(-280, 120);
+    glEnd();
+
+    glColor3ub(255, 248, 150);
+    glBegin(GL_POLYGON);
+        glColor3ub(99, 99, 99);
+        glVertex2d(-300,20);
+        glColor3ub(55, 55, 55);
+        glVertex2d(-100,20);
+        glColor3ub(99, 99, 99);
+        glVertex2d(-100, 100);
+        glColor3ub(55, 55, 55);
+        glVertex2d(-250, 100);
+    glEnd();
+
+    glColor3ub(255, 248, 150);
+    glBegin(GL_POLYGON);
+        glColor3ub(99, 99, 99);
+        glVertex2d(-70,20);
+        glColor3ub(55, 55, 55);
+        glVertex2d(200,20);
+        glColor3ub(99, 99, 99);
+        glVertex2d(100, 100);
+        glColor3ub(55, 55, 55);
+        glVertex2d(-70, 100);
+    glEnd();
+
+
+    // tires
+    glColor3ub(85,85,85);
+    circleShape(-200, -110, 60, 60);
+    circleShape(250, -110, 60, 60);
+
+    // wheels
+    glColor3ub(200,200,200);
+    circleShape(-200, -110, 30, 30);
+    circleShape(250, -110, 30, 30);
+}
+
 void poly(int x, int y)
 {
     glPushMatrix();
@@ -65,6 +212,40 @@ void Zebra(int x)
     glEnd();
     glPopMatrix();
 }
+void update(){
+    vPos1 += vSpeed1;
+    if(vPos1 > 2000){
+        vPos1 = -4500;
+    }
+
+    vPos2 += vSpeed2;
+    if(vPos2 > 3000){
+        vPos2 = -5500;
+    }
+
+    vPos6 += vSpeed6;
+    if(vPos6 > 3000){
+        vPos6 = -4500;
+    }
+
+    vPos3 -= vSpeed3;
+    if(vPos3 < -3000){
+        vPos3 = 3500;
+    }
+
+    vPos4 -= vSpeed4;
+    if(vPos4 < -3500){
+        vPos4 = 4500;
+    }
+
+    vPos5 -= vSpeed5;
+    if(vPos5 < -4000){
+        vPos5 = 3500;
+    }
+
+    glutPostRedisplay();
+}
+
 
 void myDisplay()
 {
@@ -604,6 +785,50 @@ void myDisplay()
     glEnd();
     glPopMatrix();
 
+    ///Movement
+
+    glPushMatrix();
+        glScaled(0.15, 0.3, 0);
+        glTranslated(vPos1, 100, 1);
+        truck();
+    glPopMatrix();
+
+    glPushMatrix();
+        glScaled(0.15, 0.3, 0);
+        glTranslated(vPos2, 150, 1);
+        truck();
+    glPopMatrix();
+
+    glPushMatrix();
+        glScaled(0.1, 0.2, 0);
+        glTranslated(vPos6, 150, 1);
+        car();
+    glPopMatrix();
+
+
+
+    glPushMatrix();
+        glScaled(0.18, 0.37, 0);
+        glTranslated(vPos3, -80, 1);
+        glRotated(180, 0, 1, 0);
+        truck();
+    glPopMatrix();
+
+    glPushMatrix();
+        glScaled(0.12, 0.25, 0);
+        glTranslated(vPos4, -120, 1);
+        glRotated(180, 0, 1, 0);
+        car();
+    glPopMatrix();
+
+    glPushMatrix();
+        glScaled(0.12, 0.25, 0);
+        glTranslated(vPos5, -180, 1);
+        glRotated(180, 0, 1, 0);
+        car();
+    glPopMatrix();
+
+
 
     ///Zebra Crossing
 
@@ -640,8 +865,40 @@ void myDisplay()
     glVertex2d(-197,45);
     glEnd();
     glPopMatrix();
+
+    update();
     glFlush();
 }
+void stop(){
+    vSpeed1 = 0.0;
+    vSpeed2 = 0.0;
+    vSpeed3 = 0.0;
+    vSpeed4 = 0.0;
+    vSpeed5 = 0.0;
+    vSpeed6 = 0.0;
+}
+
+void run(){
+    vSpeed1 = 2.0;
+    vSpeed2 = 3.0;
+    vSpeed3 = 1.5;
+    vSpeed4 = 3.0;
+    vSpeed5 = 4.0;
+    vSpeed6 = 2.5;
+}
+
+void keyPress(unsigned char key, int x, int y) {
+    switch(key){
+        case 'r':
+        glutIdleFunc(run);
+        break;
+
+        case 's':
+        glutIdleFunc(stop);
+        break;
+    }
+}
+
 int main()
 {
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
@@ -650,8 +907,10 @@ int main()
     glutCreateWindow("Simple Line");
     init();
     glutDisplayFunc(myDisplay);
+    glutKeyboardFunc(keyPress);
     glutMainLoop();
 
     return 0;
 }
+
 
