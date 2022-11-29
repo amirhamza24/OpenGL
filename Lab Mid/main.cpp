@@ -1,263 +1,267 @@
+#include<windows.h>
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
-#include<windows.h>
 #include <GL/glut.h>
 #endif
 #include <stdlib.h>
+#include<math.h>
+#define PI 3.1416
 #include<stdio.h>
 
-double r;
-void reshape(int width, int height){
-  glViewport(0,0,width, height);
+void init()
+{
+    glClearColor(2,1.9,1.9,1);
+    glOrtho(-100,100,-100,100,-100,100);
+}
 
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-
-  gluPerspective(45.0, (double)width/(double)height, 1.0, 200.0);
+void circle(float radiusX,float radiusY)
+{
+    int i;
+    float angle=0.0;
+    glBegin(GL_LINE_LOOP);
+        for(i=0;i<100;i++)
+        {
+            angle= 2*PI*i/100;
+            glVertex2f(radiusX*cos(angle),radiusY*sin(angle));
+        }
+    glEnd();
 
 }
-void myDisplay(){
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-  glTranslated(0,0,-20);
-  //glRotated(-45,1,1,0);
-  glRotated(r,0,1,0);
-  //glRotated(r,0,1,0);
+void line()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
 
-       ///door
-      glPushMatrix();
-       glColor3ub(102, 51, 0);
-       glBegin(GL_QUADS);
-        glVertex3d(-2,1.8,3.1);
-        glVertex3d(-2,-2,3.1);
-        glVertex3d(-0.8, -2,3.1);
-        glVertex3d(-0.8,1.8,3.1);
-       glEnd;
-      glPopMatrix();
+    ///main road border up
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(0.6,0.6,0.6);
 
-      ///front window1
-      glPushMatrix();
-       glColor3ub(102, 51, 0);
-       glBegin(GL_QUADS);
-        glVertex3d(-0.5,1.8,3.1);
-        glVertex3d(-0.5,0.5,3.1);
-        glVertex3d(0.6, 0.5,3.1);
-        glVertex3d(0.6,1.8,3.1);
-       glEnd;
-      glPopMatrix();
+            glVertex2d(-100,50);
+            glVertex2d(100,50);
+            glVertex2d(100,70);
+            glVertex2d(-100,70);
+    glEnd();
 
-      ///front window2
-      glPushMatrix();
-       glColor3ub(102, 51, 0);
-       glBegin(GL_QUADS);
-        glVertex3d(1,1.8,3.1);
-        glVertex3d(1,0.5,3.1);
-        glVertex3d(2, 0.5,3.1);
-        glVertex3d(2,1.8,3.1);
-       glEnd;
-      glPopMatrix();
+    ///main road border down
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );//main road border
+        glColor3f(0.6,0.6,0.6);
 
-      ///front window3
-      glPushMatrix();
-       glColor3ub(102, 51, 0);
-       glBegin(GL_QUADS);
-        glVertex3d(2.4,1.8,3.1);
-        glVertex3d(2.4,0.5,3.1);
-        glVertex3d(3.4, 0.5,3.1);
-        glVertex3d(3.4,1.8,3.1);
-       glEnd;
-      glPopMatrix();
+            glVertex2d(-100,-45);
+            glVertex2d(100,-45);
+            glVertex2d(100,-65);
+            glVertex2d(-100,-65);
+    glEnd();
 
-      ///front window4
-      glPushMatrix();
-       glColor3ub(102, 51, 0);
-       glBegin(GL_QUADS);
-        glVertex3d(3.8,1.8,3.1);
-        glVertex3d(3.8,0.5,3.1);
-        glVertex3d(4.8, 0.5,3.1);
-        glVertex3d(4.8,1.8,3.1);
-       glEnd;
-      glPopMatrix();
+    ///main road black
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(0,0,0);
 
-      ///back window1
-      glPushMatrix();
-       glColor3ub(102, 51, 0);
-       glBegin(GL_QUADS);
-        glVertex3d(-0.5,1.8,-3.1);
-        glVertex3d(-0.5,0.5,-3.1);
-        glVertex3d(0.6, 0.5,-3.1);
-        glVertex3d(0.6,1.8,-3.1);
-       glEnd;
-      glPopMatrix();
+            glVertex2d(-100,50);
+            glVertex2d(100,50);
+            glVertex2d(100,-45);
+            glVertex2d(-100,-45);
+    glEnd();
 
-      ///back window2
-      glPushMatrix();
-       glColor3ub(102, 51, 0);
-       glBegin(GL_QUADS);
-        glVertex3d(1,1.8,-3.1);
-        glVertex3d(1,0.5,-3.1);
-        glVertex3d(2, 0.5,-3.1);
-        glVertex3d(2,1.8,-3.1);
-       glEnd;
-      glPopMatrix();
+    ///road up border
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(1,1,1);
 
-      ///back window3
-      glPushMatrix();
-       glColor3ub(102, 51, 0);
-       glBegin(GL_QUADS);
-        glVertex3d(2.4,1.8,-3.1);
-        glVertex3d(2.4,0.5,-3.1);
-        glVertex3d(3.4, 0.5,-3.1);
-        glVertex3d(3.4,1.8,-3.1);
-       glEnd;
-      glPopMatrix();
+            glVertex2d(-100,45);
+            glVertex2d(100,45);
+            glVertex2d(100,40);
+            glVertex2d(-100,40);
+    glEnd();
 
-      ///back window4
-      glPushMatrix();
-       glColor3ub(102, 51, 0);
-       glBegin(GL_QUADS);
-        glVertex3d(3.8,1.8,-3.1);
-        glVertex3d(3.8,0.5,-3.1);
-        glVertex3d(4.8, 0.5,-3.1);
-        glVertex3d(4.8,1.8,-3.1);
-       glEnd;
-      glPopMatrix();
+    ///road down border
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(1,1,1);
+
+            glVertex2d(-100,-40);
+            glVertex2d(100,-40);
+            glVertex2d(100,-35);
+            glVertex2d(-100,-35);
+    glEnd();
+
+    ///left border 3
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(1,1,1);
+
+            glVertex2d(-100,5);
+            glVertex2d(-85,5);
+            glVertex2d(-85,0);
+            glVertex2d(-100,0);
+    glEnd();
+
+    ///left border 2
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(1,1,1);
+
+            glVertex2d(-76,5);
+            glVertex2d(-60,5);
+            glVertex2d(-60,0);
+            glVertex2d(-76,0);
+    glEnd();
+
+    ///left border 1
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(1,1,1);
+
+            glVertex2d(-35,5);
+            glVertex2d(-50,5);
+            glVertex2d(-50,0);
+            glVertex2d(-35,0);
+    glEnd();
+
+    ///right border 1
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(1,1,1);
+
+            glVertex2d(100,5);
+            glVertex2d(85,5);
+            glVertex2d(85,0);
+            glVertex2d(100,0);
+    glEnd();
+
+    ///right border 2
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(1,1,1);
+
+            glVertex2d(75,5);
+            glVertex2d(59,5);
+            glVertex2d(59,0);
+            glVertex2d(75,0);
+    glEnd();
+
+    ///right border 3
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(1,1,1);
+
+            glVertex2d(35,5);
+            glVertex2d(50,5);
+            glVertex2d(50,0);
+            glVertex2d(35,0);
+    glEnd();
+
+    ///road middle border 1
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(1,1,1);
+
+            glVertex2d(-25,30);
+            glVertex2d(25,30);
+            glVertex2d(25,35);
+            glVertex2d(-25,35);
+    glEnd();
+
+    ///road middle border 2
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(1,1,1);
+
+            glVertex2d(-25,20);
+            glVertex2d(25,20);
+            glVertex2d(25,25);
+            glVertex2d(-25,25);
+    glEnd();
+
+    ///road middle border 3
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(1,1,1);
+
+            glVertex2d(-25,10);
+            glVertex2d(25,10);
+            glVertex2d(25,15);
+            glVertex2d(-25,15);
+    glEnd();
 
 
-     ///front
-     glPushMatrix();
-      glColor3f(1.0f,1.0f,0.0f);
-      glBegin(GL_QUADS);
-       glVertex3f(6,3,3);
-       glVertex3f(-2,3,3);
-       glVertex3f(-6,-3,3);
-       glVertex3f(6,-3,3);
+    ///road middle border 4
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );
+        glColor3f(1,1,1);
+
+            glVertex2d(-25,5);
+            glVertex2d(25,5);
+            glVertex2d(25,0);
+            glVertex2d(-25,0);
+    glEnd();
+
+    ///road middle border 5
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );//middle strip box
+        glColor3f(1,1,1);
+
+            glVertex2d(-25,-5);
+            glVertex2d(25,-5);
+            glVertex2d(25,-10);
+            glVertex2d(-25,-10);
+    glEnd();
+
+    ///road middle border 6
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );//middle strip box
+        glColor3f(1,1,1);
+
+            glVertex2d(-25,-15);
+            glVertex2d(25,-15);
+            glVertex2d(25,-20);
+            glVertex2d(-25,-20);
+    glEnd();
+
+    ///road middle border 7
+    glBegin(GL_QUADS);
+        glColor3f( 0.058 ,0.05,0.05 );//middle strip box
+        glColor3f(1,1,1);
+
+            glVertex2d(-25,-25);
+            glVertex2d(25,-25);
+            glVertex2d(25,-30);
+            glVertex2d(-25,-30);
+    glEnd();
 
 
-      /*glPushMatrix();
-       glColor3ub(102, 51, 0);
-       glBegin(GL_QUADS);
-       glVertex3d(-2,1.8,3);
-       glVertex3d(-2,-2,3);
-       glVertex3d(-1, -2,3);
-       glVertex3d(-1,1.8,3);
-       glEnd;
-      glPopMatrix();
-
-      glPushMatrix();
-      glColor3ub(102, 51, 0);
-      glBegin(GL_QUADS);
-      glVertex3d(-0.5,1.8,3);
-      glVertex3d(-0.5,0,3);
-      glVertex3d(0.6, 0,3);
-      glVertex3d(0.6,1.8,3);
-      glEnd;
-      glPopMatrix();*/
-      glEnd();
-     glPopMatrix();
-
-    ///back
+    ///left circle
     glPushMatrix();
-     glColor3f(1.0f,1.0f,0.0f);
-     glBegin(GL_QUADS);
-      glVertex3f(6,3,-3);
-      glVertex3f(-2,3,-3);
-      glVertex3f(-6,-3,-3);
-      glVertex3f(6,-3,-3);
-
-     glEnd();
+        glTranslatef(-68,2,0);
+        glColor3f(1,1,1);
+            circle(8,20);
     glPopMatrix();
 
-    ///left side
+    ///right circle
     glPushMatrix();
-     glColor3f(1.0f,0.0f,0.0f);
-     glBegin(GL_QUADS);
-      glVertex3f(-2,3,3);
-      glVertex3f(-2,3,-3);
-      glVertex3f(-6,-3,-3);
-      glVertex3f(-6,-3,3);
-     glEnd();
+        glTranslatef(67,2,0);
+        glColor3f(1,1,1);
+            circle(8,20);
     glPopMatrix();
 
-    ///right side
-    glPushMatrix();
-     glColor3f(1.0f,0.0f,0.0f);
-     glBegin(GL_QUADS);
-      glVertex3f(6,3,3);
-      glVertex3f(6,3,-3);
-      glVertex3f(6,-3,-3);
-      glVertex3f(6,-3,3);
-     glEnd();
-    glPopMatrix();
 
-    ///top side
-    glPushMatrix();
-     glColor3f(1.0f,1.0f,1.0f);
-     glBegin(GL_QUADS);
-      glVertex3f(-2,3,-3);
-      glVertex3f(6,3,-3);
-      glVertex3f(6,3,3);
-      glVertex3f(-2,3,3);
-     glEnd();
-    glPopMatrix();
-
-  glutSwapBuffers();
-
-}
-
-void rotates()
-{
-    r = r + 0.1;
-    glutPostRedisplay();
-}
-
-void rotates2()
-{
-
-    r = r+0.1;
-    glutPostRedisplay();
-}
-
-void keyMove(unsigned char key, int x, int y)
-{
-    switch(key)
-    {
-    case 'r':
-        glutIdleFunc(rotates);
-        break;
-
-    case 'a':
-        glutIdleFunc(rotates2);
-        break;
-
-    case 'b':
-        glutIdleFunc(NULL);
-        break;
-    }
-
+    glFlush();
 }
 
 
-int main(int argc, char *argv[])
+int main()
 {
-
-    printf("Student Id: CSE 06908020\n");
-    printf("Name: Amir Hamza");
-    glutInit(&argc, argv);
-    glutInitWindowSize(1100,700);
-    //glutInitWindowPosition(10,10);
-    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-    glutCreateWindow("ID: CSE06908020.. Name: Amir Hamza");
-    glEnable(GL_DEPTH_TEST);
-    glutReshapeFunc(reshape);
-    glutDisplayFunc(myDisplay);
-    glutKeyboardFunc(keyMove);
-
+    printf("Student ID: CSE 06908020\n");
+    printf("Name: Amir Hamza..");
+    glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
+    glutInitWindowSize(500,500);
+    glutInitWindowPosition(100,100);
+    glutCreateWindow("Amir Hamza_CSE06908020");
+    init();
+    glutDisplayFunc(line);
 
     glutMainLoop();
-
-    return EXIT_SUCCESS;
 }
